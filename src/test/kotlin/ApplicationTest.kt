@@ -1,5 +1,6 @@
 package com.sylvara
 
+import com.sylvara.com.sylvara.bootstrap.module
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*

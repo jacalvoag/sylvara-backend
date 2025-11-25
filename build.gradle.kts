@@ -2,13 +2,28 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
     alias(libs.plugins.kotlin.plugin.serialization)
+    id("com.gradleup.shadow") version "9.2.2"
 }
 
 group = "com.sylvara"
 version = "0.0.1"
 
+val ktor_version = "3.3.2"
+
 application {
     mainClass = "com.sylvara.ApplicationKt"
+}
+
+tasks{
+    shadowJar {
+        //Esto evita conflictos con nombres de archivos duplicados en librerias
+        mergeServiceFiles()
+        manifest {
+            attributes(mapOf("Main-Class" to "com.example.Applicationkt"))
+        }
+        //Opcional: Nombre fijo para no tener versiones en el nombre del archivo
+        archiveFileName.set("sylvara.jar")
+    }
 }
 
 dependencies {
@@ -30,4 +45,8 @@ dependencies {
     implementation(libs.logback.classic)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
+
+    //Dependencias añadidas
+    implementation("org.postgresql:postgresql:42.7.8")
+    implementation("com.zaxxer:HikariCP:7.0.2")
 }

@@ -34,3 +34,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Archivo .gitignore
+.env
+.env.local
+.env.*.local
