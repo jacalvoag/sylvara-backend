@@ -11,15 +11,15 @@ version = "0.0.1"
 val ktor_version = "3.3.2"
 
 application {
-    mainClass = "com.sylvara.ApplicationKt"
+    mainClass = "com.sylvara.bootstrap.ApplicationKt"
 }
 
-tasks{
+tasks {
     shadowJar {
         //Esto evita conflictos con nombres de archivos duplicados en librerias
         mergeServiceFiles()
         manifest {
-            attributes(mapOf("Main-Class" to "com.example.Applicationkt"))
+            attributes(mapOf("Main-Class" to "com.sylvara.bootstrap.ApplicationKt"))
         }
         //Opcional: Nombre fijo para no tener versiones en el nombre del archivo
         archiveFileName.set("sylvara.jar")
@@ -43,10 +43,10 @@ dependencies {
     implementation(libs.ktor.server.auth.jwt)
     implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
+
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
-
-    //Dependencias añadidas
     implementation("org.postgresql:postgresql:42.7.8")
     implementation("com.zaxxer:HikariCP:7.0.2")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.61.0")
 }

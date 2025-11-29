@@ -1,7 +1,8 @@
 package com.sylvara
 
-import com.sylvara.com.sylvara.bootstrap.module
+import com.sylvara.bootstrap.module
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import kotlin.test.Test
@@ -14,9 +15,8 @@ class ApplicationTest {
         application {
             module()
         }
-        client.get("/").apply {
-            assertEquals(HttpStatusCode.OK, status)
-        }
+        val response = client.get("/")
+        assertEquals(HttpStatusCode.OK, response.status)
+        assertEquals("Sylvara API - v1.0", response.bodyAsText())
     }
-
 }
